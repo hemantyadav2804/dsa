@@ -1,0 +1,135 @@
+Here’s a **clear, viva-ready explanation** of your `0-1 Knapsack (Dynamic Programming)` code — written so you can **explain it smoothly to an examiner**:
+
+---
+
+### 🔹 **Program Title:**
+
+0-1 Knapsack Problem using Dynamic Programming (Menu-driven C++ Program)
+
+---
+
+### 🔹 **Aim:**
+
+To find the maximum total value that can be obtained by selecting items such that their total weight does not exceed the given knapsack capacity, using the **Dynamic Programming** approach.
+
+---
+
+### 🔹 **Concept Used:**
+
+The **0-1 Knapsack problem** means each item can either be **taken or left** (no fractional selection).
+Dynamic Programming (DP) is used to **store subproblem results** and **avoid recalculation**, improving efficiency from exponential (recursion) to polynomial time.
+
+---
+
+### 🔹 **Header Files Used:**
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+```
+
+* `<iostream>` → For input/output
+* `<vector>` → For dynamic arrays
+* `<algorithm>` → For using the `max()` function
+
+---
+
+### 🔹 **Functions Explanation:**
+
+#### **1. int knapsackDP(int capacity, vector<int>& weights, vector<int>& values, int n)**
+
+This function solves the knapsack problem using **bottom-up DP**.
+
+**Step-by-step:**
+
+* A 2D DP table `dp[n+1][capacity+1]` is created, where
+  `dp[i][w]` = maximum value possible with `i` items and capacity `w`.
+
+* It fills the table using this logic:
+
+  ```cpp
+  if (weights[i-1] <= w)
+      dp[i][w] = max(values[i-1] + dp[i-1][w - weights[i-1]], dp[i-1][w]);
+  else
+      dp[i][w] = dp[i-1][w];
+  ```
+
+  👉 If the current item can fit, we decide whether to take it or skip it.
+  👉 Otherwise, we just skip it.
+
+* After the table is filled, the function **backtracks** to find which items were selected.
+
+  ```cpp
+  if(dp[i][w] != dp[i-1][w])
+      cout << i << " ";
+  ```
+
+  This means if the value changes after including item `i`, it was selected.
+
+* Finally, it returns the **maximum possible value**, stored in `dp[n][capacity]`.
+
+---
+
+#### **2. main() Function**
+
+A **menu-driven system** allows user interaction:
+
+**Menu options:**
+
+1. Enter knapsack capacity
+2. Add items (values and weights)
+3. Solve using DP
+4. Exit
+
+**Flow:**
+
+* The user enters the capacity and item details.
+* On choosing option 3, the `knapsackDP()` function is called.
+* It displays:
+
+  * The selected items
+  * The maximum achievable value
+
+---
+
+### 🔹 **Example (For Explanation):**
+
+**Input:**
+
+```
+Capacity: 5
+Items:
+1: value=10, weight=2
+2: value=15, weight=3
+3: value=20, weight=4
+```
+
+**Output:**
+
+```
+Selected items: 2 1
+Maximum value: 25
+```
+
+(Items 1 and 2 give the best combination under capacity 5)
+
+---
+
+### 🔹 **Time and Space Complexity:**
+
+* **Time Complexity:** O(n × capacity)
+* **Space Complexity:** O(n × capacity)
+
+---
+
+### 🔹 **Key Viva Points to Mention:**
+
+* Difference between **0-1 Knapsack** and **Fractional Knapsack** (fractional allows division).
+* DP is used because recursion would cause overlapping subproblems.
+* `dp[i][w]` represents the **optimal solution** for first `i` items and capacity `w`.
+* Backtracking is used to **retrieve selected items**.
+
+---
+
+Would you like me to make a **short 1-minute viva explanation script** (spoken version) too — something you can memorize or say directly in front of your examiner?

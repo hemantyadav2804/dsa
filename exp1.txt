@@ -1,0 +1,208 @@
+Here’s a clear and exam-friendly explanation you can say or print as your viva note. It keeps the technical meaning but flows naturally when spoken.
+
+---
+
+## **Explanation of the Flight Management System Code**
+
+### **Aim**
+
+To create a simple *Flight Management System* using **C++** that stores cities and the flights between them, and represents these connections using both an **Adjacency Matrix** and an **Adjacency List**.
+
+---
+
+### **Concept Used**
+
+The program is based on the **Graph Data Structure**, where:
+
+* **Nodes (Vertices)** represent *cities*
+* **Edges** represent *flights* between cities
+* **Weights** represent *costs* of those flights
+
+Two common ways to represent a graph are used:
+
+1. **Adjacency Matrix** – a 2D table showing flight cost between every pair of cities.
+2. **Adjacency List** – a list form showing each city and the cities it’s connected to.
+
+---
+
+### **Header Files and Data Structures**
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+```
+
+* **iostream** – for input/output
+* **vector** – to store dynamic lists and the matrix
+* **map** – to assign each city a unique index number
+
+**Private Members:**
+
+```cpp
+map<string, int> cityIndex;
+vector<string> cities;
+vector<vector<int>> matrix;
+vector<vector<pair<int, int>>> list;
+```
+
+| Member      | Purpose                                             |
+| ----------- | --------------------------------------------------- |
+| `cityIndex` | Stores city name → index mapping                    |
+| `cities`    | Stores city names in order                          |
+| `matrix`    | Stores flight cost between two cities               |
+| `list`      | Stores city connections as pairs `(neighbor, cost)` |
+
+---
+
+### **Member Functions**
+
+#### **1. addCity(string name)**
+
+* Adds a new city to the system if it does not already exist.
+* Updates:
+
+  * `cityIndex` map
+  * `cities` list
+  * Resizes `matrix` and `list`
+* Prints a confirmation message.
+  **Example:**
+  `City added: Pune`
+
+---
+
+#### **2. addFlight(string cityA, string cityB, int cost)**
+
+* Finds indexes of both cities using `cityIndex`.
+* Adds flight in **both directions** (bidirectional).
+* Updates:
+
+  * `matrix[a][b]` and `matrix[b][a]`
+  * `list[a]` and `list[b]`
+* Displays confirmation message.
+  **Example:**
+  `Flight added: Pune <-> Delhi (Cost: 500)`
+
+---
+
+#### **3. checkConnected(string cityA, string cityB)**
+
+* Checks if a flight exists between two cities using the matrix.
+* If cost > 0 → they are connected.
+  **Output:**
+  ✓ Connected! Cost: 500
+  ✗ Not connected
+
+---
+
+#### **4. displayMatrix()**
+
+* Prints the adjacency matrix in table form.
+  **Example:**
+
+```
+Matrix:
+0 500 0
+500 0 200
+0 200 0
+```
+
+---
+
+#### **5. displayList()**
+
+* Prints the adjacency list for each city.
+  **Example:**
+
+```
+List:
+Pune -> Delhi(500)
+Delhi -> Pune(500) Mumbai(200)
+Mumbai -> Delhi(200)
+```
+
+---
+
+### **Main Function**
+
+```cpp
+int main() {
+    FlightSystem flights;
+    ...
+}
+```
+
+* Creates an object `flights` of the `FlightSystem` class.
+
+* Uses a **menu-driven loop** to perform actions:
+
+  1. Add City
+  2. Add Flight
+  3. Check Connection
+  4. Show Matrix
+  5. Show List
+  6. Exit
+
+* The loop runs until the user chooses option 6.
+
+---
+
+### **Sample Output**
+
+```
+=== SIMPLE FLIGHT SYSTEM ===
+1. Add City
+2. Add Flight
+3. Check Connection
+4. Show Matrix
+5. Show List
+6. Exit
+
+Choose: 1
+City name: Pune
+City added: Pune
+
+Choose: 1
+City name: Delhi
+City added: Delhi
+
+Choose: 2
+City 1: Pune
+City 2: Delhi
+Cost: 500
+Flight added: Pune <-> Delhi (Cost: 500)
+
+Choose: 3
+City 1: Pune
+City 2: Delhi
+✓ Connected! Cost: 500
+```
+
+---
+
+### **Advantages**
+
+* Demonstrates use of **graphs**, **maps**, and **vectors**.
+* Uses both adjacency matrix and list — helps understand trade-offs.
+* Menu-driven and easy to interact with.
+
+---
+
+### **Output Comparison**
+
+| Representation       | Description                           | Example                       |
+| -------------------- | ------------------------------------- | ----------------------------- |
+| **Adjacency Matrix** | Table showing cost between all cities | Fast lookup, uses more memory |
+| **Adjacency List**   | Compact list of direct connections    | Saves memory, easier to read  |
+
+---
+
+### **Conclusion**
+
+This program efficiently demonstrates the **graph representation** of a flight network using **C++ OOP concepts**, **STL containers** (`map`, `vector`), and provides both **Adjacency Matrix** and **Adjacency List** views.
+It helps understand how graphs can model real-world systems like flight routes or city connections.
+
+---
+
+Would you like me to make a short **1-minute viva speech version** (something you can memorize and say confidently in front of the examiner)?

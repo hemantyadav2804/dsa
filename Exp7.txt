@@ -1,0 +1,154 @@
+Here’s a **viva-ready explanation** of your **C++ Min-Max Heap program** — structured for you to confidently explain it to your examiner:
+
+---
+
+### 🔹 **Program Title:**
+
+Finding Minimum and Maximum Marks using Min Heap and Max Heap (C++ Program)
+
+---
+
+### 🔹 **Aim:**
+
+To implement a program that stores marks in a vector and uses **Heap Data Structures** (Min Heap and Max Heap) to find the **minimum** and **maximum** marks efficiently.
+
+---
+
+### 🔹 **Concept Used:**
+
+A **Heap** is a **complete binary tree** stored as an array or vector, satisfying one of two properties:
+
+* **Min Heap:** The smallest element is always at the root.
+* **Max Heap:** The largest element is always at the root.
+
+The program uses **heapify logic** to rearrange elements so that these properties hold true.
+
+---
+
+### 🔹 **Header Files Used:**
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+```
+
+* `<iostream>` → for input/output
+* `<vector>` → for dynamic array
+* `<algorithm>` → for `swap()` function
+
+---
+
+### 🔹 **Class: Marks**
+
+The `Marks` class encapsulates all data and heap operations.
+
+#### **Data Member:**
+
+```cpp
+vector<int> m;
+```
+
+Stores the marks dynamically using a vector.
+
+---
+
+### 🔹 **Private Functions:**
+
+#### **1. void makeMinHeap()**
+
+* Rearranges the elements of vector `m` to satisfy **Min Heap** property.
+* Iterates from middle to first index:
+
+  ```cpp
+  for(int i = m.size()/2 - 1; i >= 0; i--)
+  ```
+* Compares a node with its left and right children.
+* Swaps if a smaller element is found.
+* Recursively calls `makeMinHeap()` to maintain heap property.
+
+Result: **Smallest element** moves to the **top (index 0)**.
+
+---
+
+#### **2. void makeMaxHeap()**
+
+* Similar to `makeMinHeap()`, but ensures **Max Heap** property.
+* Compares a node with its children and swaps if a larger element is found.
+* After completion, **largest element** is at **index 0**.
+
+---
+
+### 🔹 **Public Functions:**
+
+#### **1. void add(int mark)**
+
+Adds a new mark to the vector using `push_back()`.
+
+#### **2. int getMin()**
+
+Calls `makeMinHeap()` and returns the first element `m[0]` (smallest).
+
+#### **3. int getMax()**
+
+Calls `makeMaxHeap()` and returns `m[0]` (largest).
+
+#### **4. void show()**
+
+Displays all marks currently stored in the vector.
+
+---
+
+### 🔹 **Main Function Explanation:**
+
+```cpp
+int main() {
+    Marks m;
+    int c, mark;
+    cout << "1.Add 2.Min 3.Max 4.Show 5.Exit\n";
+```
+
+A **menu-driven program** is used to perform operations.
+
+**Options:**
+1️⃣ Add → Input a new mark.
+2️⃣ Min → Display the minimum mark using min heap.
+3️⃣ Max → Display the maximum mark using max heap.
+4️⃣ Show → Display all marks in vector form.
+5️⃣ Exit → Terminate program.
+
+---
+
+### 🔹 **Example Execution:**
+
+```
+1.Add → 50
+1.Add → 70
+1.Add → 40
+2.Min → Min: 40
+3.Max → Max: 70
+4.Show → 50 70 40
+```
+
+---
+
+### 🔹 **Key Viva Points:**
+
+* **Heap:** A tree-based structure stored in an array or vector.
+* **Complete Binary Tree:** All levels filled except possibly the last.
+* **Min Heap Property:** Parent < Child
+* **Max Heap Property:** Parent > Child
+* `swap()` from `<algorithm>` is used for element interchange.
+* Recursion ensures heap property is maintained across all levels.
+
+---
+
+### 🔹 **Time Complexity:**
+
+* **Heapify:** O(n)
+* **Find Min/Max:** O(1)
+* **Insertion:** O(1) (simple push in vector)
+
+---
+
+Would you like me to also write a **1-minute spoken viva explanation** — short enough to memorize and say naturally in front of an examiner?

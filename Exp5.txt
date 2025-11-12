@@ -1,0 +1,195 @@
+Here’s a **complete viva-ready explanation** for your **Fractional Knapsack program** 👇
+
+---
+
+### 🔹 **Program Title:**
+
+**Implementation of Fractional Knapsack Problem using Greedy Method**
+
+---
+
+### **Aim:**
+
+To solve the **Fractional Knapsack problem** using the **greedy algorithm** to maximize profit (value) within a given knapsack capacity.
+
+---
+
+### **Theory / Concept:**
+
+The **Knapsack problem** is a classic optimization problem where we have:
+
+* A **bag (knapsack)** with limited **capacity (weight limit)**.
+* A set of **items**, each having a **value** and **weight**.
+
+We must choose items such that the **total value is maximized**, **without exceeding capacity**.
+
+#### There are two types of Knapsack problems:
+
+1. **0/1 Knapsack:** Each item can be either **taken completely or left**.
+2. **Fractional Knapsack:** Items can be **divided**, meaning **fractions** of an item can be included.
+
+This program implements **Fractional Knapsack** using a **Greedy Approach**, where:
+
+* We pick items based on **maximum value-to-weight ratio (value/weight)**.
+* Continue adding until the knapsack is full.
+* If an item doesn’t fit completely, we take only the **fraction** that fits.
+
+---
+
+### **Algorithm Steps:**
+
+1. Input the **knapsack capacity** and **number of items**.
+2. For each item, input **value** and **weight**.
+3. Calculate **value/weight ratio** for each item.
+4. **Sort items in descending order** of their ratio.
+5. Start adding items:
+
+   * If the whole item fits, add completely.
+   * Otherwise, take only the fraction that fits.
+6. Print total value gained.
+
+---
+
+### **Code Explanation (Step-by-Step):**
+
+#### **1. Structure for Item**
+
+```cpp
+struct Item {
+    int value, weight;
+    double ratio() { return (double)value / weight; }
+};
+```
+
+* Defines an **Item** with:
+
+  * `value`: profit of item
+  * `weight`: weight of item
+* Function `ratio()` returns **value/weight ratio** to measure profit per unit weight.
+
+---
+
+#### **2. Sorting Function**
+
+```cpp
+bool compare(Item a, Item b) { 
+    return a.ratio() > b.ratio(); 
+}
+```
+
+* Custom comparator for `sort()` function.
+* Ensures items are sorted in **descending order** of ratio (most valuable first).
+
+---
+
+#### **3. Input Section**
+
+```cpp
+vector<Item> items;
+int capacity, n, v, w;
+
+cout << "Knapsack capacity: "; cin >> capacity;
+cout << "Number of items: "; cin >> n;
+
+for(int i = 0; i < n; i++) {
+    cout << "Item " << i+1 << " (value weight): ";
+    cin >> v >> w;
+    items.push_back({v, w});
+}
+```
+
+* Takes **knapsack capacity** and **number of items**.
+* Stores all items in a **vector** for dynamic handling.
+
+---
+
+#### **4. Sorting the Items**
+
+```cpp
+sort(items.begin(), items.end(), compare);
+```
+
+* Uses the `compare` function to arrange items by highest **value/weight ratio** first.
+* This is the **greedy step**.
+
+---
+
+#### **5. Selecting Items**
+
+```cpp
+double total = 0.0;
+int current = 0;
+
+for(auto item : items) {
+    if(current + item.weight <= capacity) {
+        total += item.value;
+        current += item.weight;
+        cout << "Whole item: Value=" << item.value << ", Weight=" << item.weight << endl;
+    } else {
+        int rem = capacity - current;
+        total += item.value * ((double)rem / item.weight);
+        cout << "Fraction: Value=" << item.value << ", Weight=" << rem << "/" << item.weight << endl;
+        break;
+    }
+}
+```
+
+**Explanation:**
+
+* Keeps track of total weight and value.
+* If the item can fit fully → add full value and weight.
+* If it can’t fit → take **fraction proportional** to remaining capacity.
+* Stop when knapsack becomes full.
+
+---
+
+#### **6. Output**
+
+```cpp
+cout << "Maximum value: " << total << endl;
+```
+
+* Displays the **maximum total value** obtained.
+
+---
+
+### **Example Input/Output**
+
+**Input:**
+
+```
+Knapsack capacity: 50
+Number of items: 3
+Item 1 (value weight): 60 10
+Item 2 (value weight): 100 20
+Item 3 (value weight): 120 30
+```
+
+**Output:**
+
+```
+Items taken:
+Whole item: Value=60, Weight=10
+Whole item: Value=100, Weight=20
+Fraction: Value=120, Weight=20/30
+Maximum value: 240
+```
+
+---
+
+### **Key Points to Mention in Viva:**
+
+1. **Greedy Approach** → always picks the next best (highest ratio) item.
+2. **Sorting** by `value/weight` ratio is crucial.
+3. Works for **fractional case**, not for **0/1 Knapsack**.
+4. **Time Complexity:**
+
+   * Sorting → O(n log n)
+   * Selection → O(n)
+   * **Total = O(n log n)**
+5. **Advantage:** Simple and optimal for fractional cases.
+6. **Limitation:** Cannot be used when items can’t be divided (0/1 case).
+
+---
+
+Would you like me to make this into a **short viva sheet PDF** (clean, one-page layout with code + theory + output example)?
